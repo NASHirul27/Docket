@@ -12,15 +12,15 @@
 <body class="dark:bg-gray-900">
     <nav class="dark:bg-gray-800 p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-white font_semibold text-lh"><a href="index.php">List of Assignment</a></div>
+            <div class="text-white font_semibold text-lh"><a href="{{ route('task.index')}}">Docket</a></div>
             <div>
-                <a href="{{ route('mahasiswa.index')}}" class="text-white hover:text-gray-200 pd-4">Back</a>
+                <a href="{{ route('task.index')}}" class="text-white hover:text-gray-200 pd-4">Back</a>
             </div>
         </div>
     </nav>
 
     <div class="container mx-auto p-8">
-        <form method="POST" action="{{ route('mahasiswa.store') }}">
+        <form method="POST" action="{{ route('task.store') }}">
             @csrf
             <div class="mb-4">
                 <h2 class="text-2xl text-white font-bold mb-2">Creating New Task</h2>
@@ -74,17 +74,17 @@
             {{-- end alert --}}
 
             <div class="mb-4">
-                <label for="jenisKelamin" class="block text-indigo-400 text-sm font-bold mb-2">Priority:</label>
+                <label for="priority" class="block text-indigo-400 text-sm font-bold mb-2">Priority:</label>
             <div class="flex items-center mb-4">
-                <input type="radio" d="jk" name="jk" value="Laki-Laki" class="form-radio h-5 w-5 text-blue-600 @error('jk') is-invalid @enderror" {{ old('jk') === 'Laki-Laki' ? 'checked' : ''}}>
-                <label for="male" class="text-white ml-2">Laki-Laki</label>
+                <input type="radio" d="priority" name="priority" value="Important" class="form-radio h-5 w-5 text-blue-600 @error('priority') is-invalid @enderror" {{ old('priority') === 'Important' ? 'checked' : ''}}>
+                <label for="important" class="text-white ml-2">Important</label>
             </div>
             <div class="flex items-center mb-4">
-                <input type="radio" d="jk" name="jk" value="Perempuan" class="form-radio h-5 w-5 text-pink-600 @error('jk') is-invalid @enderror" {{ old('jk') === 'Perempuan' ? 'checked' : ''}}>
-                <label for="male" class="text-white ml-2">Perempuan</label>
+                <input type="radio" d="priority" name="priority" value="NotImportant" class="form-radio h-5 w-5 text-pink-600 @error('priority') is-invalid @enderror" {{ old('priority') === 'NotImportant' ? 'checked' : ''}}>
+                <label for="notimportant" class="text-white ml-2">Not Important</label>
             </div>
             {{-- alert --}}
-            @error('jk')
+            @error('priority')
                 <div class="border-1-4 border-orange-500 text-orange-700 p-4" role="alert">
                     <p class="font-bold">{{ $message }}</p>
                 </div>
@@ -93,28 +93,22 @@
 
             </div>
             <div class="mb-4">
-                <label for="prodi" class="block text-indigo-400 text-sm font-bold mb-2">Prodi:</label>
-                <input type="text" id="prodi" name="prodi" class="dark:bg-gray-800 text-white rounded-md py-2 px-3 w-full @error('prodi') is-invalid @enderror" value="{{ old('prodi') }}">
+                <label for="status" class="block text-indigo-400 text-sm font-bold mb-2">Status:</label>
+                <select id="status" name="status" class="dark:bg-gray-800 text-white rounded-md py-2 px-3 w-full @error('status') is-invalid @enderror">
+                    <option value="todo">To Do</option>
+                    <option value="doing">Doing</option>
+                    <option value="done">Done</option>
+                </select>
             </div>
             {{-- alert --}}
-            @error('prodi')
+            @error('status')
                 <div class="border-1-4 border-orange-500 text-orange-700 p-4" role="alert">
                     <p class="font-bold">{{ $message }}</p>
                 </div>
             @enderror
             {{-- end alert --}}
 
-            <div class="mb-4">
-                <label for="jurusan" class="block text-indigo-400 text-sm font-bold mb-2">Jurusan:</label>
-                <input type="text" id="jurusan" name="jurusan" class="dark:bg-gray-800 text-white rounded-md py-2 px-3 w-full @error('jurusan') is-invalid @enderror" value="{{ old('jurusan') }}">
-            </div>
-            {{-- alert --}}
-            @error('jurusan')
-                <div class="border-1-4 border-orange-500 text-orange-700 p-4" role="alert">
-                    <p class="font-bold">{{ $message }}</p>
-                </div>
-            @enderror
-            {{-- end alert --}}
+            
 
             <div>
                 <button type="submit" class="bg-indigo-400 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" name="tambah">Tambah</button>

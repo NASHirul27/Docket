@@ -38,7 +38,7 @@ class TaskController extends Controller
     {
         //validate form
         $request->validate([
-            'name' => 'required'    ,
+            'title' => 'required'    ,
             'description' => 'required',
             'due_date' => 'required|date',
             'category' => 'required',
@@ -47,7 +47,7 @@ class TaskController extends Controller
 
         ]);
         Task::create([
-            'name' => $request->name,
+            'title' => $request->title,
             'description' => $request->description,
             'due_date' => $request->due_date,
             'category' => $request->category,
@@ -99,7 +99,7 @@ class TaskController extends Controller
     {
         //validate form
         $request->validate([
-            'name' => 'required'    ,
+            'title' => 'required'    ,
             'description' => 'required',
             'due_date' => 'required|date',
             'category' => 'required',
@@ -111,7 +111,7 @@ class TaskController extends Controller
 
         //update task
         $task->update ([
-            'name' => $request->name,
+            'title' => $request->title,
             'description' => $request->description,
             'due_date' => $request->due_date,
             'category' => $request->category,
