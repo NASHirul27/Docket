@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistoryTask;
 use Illuminate\Http\Request;
+
+//import model product
+use App\Models\Task;
+
+//import return type view
+use Illuminate\View\View;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+
 
 class TaskController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -13,9 +25,21 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task = Task::latest()->pagenated(10);
+        $task = Task::latest()->paginate(10);
 
         return view('task.index', compact('task'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return void
+     */
+    public function history()
+    {
+        $history = HistoryTask::latest()->paginate(10);
+
+        return view('task.history', compact('history'));
     }
 
     /**
@@ -46,6 +70,8 @@ class TaskController extends Controller
             'status' => 'required',
 
         ]);
+        
+
         Task::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -53,6 +79,7 @@ class TaskController extends Controller
             'category' => $request->category,
             'priority' => $request->priority,
             'status' => $request->status,
+            'user_id' => Auth::user()->id,
         ]);
 
         return redirect()->route('task.index')->with('success', 'Task created successfully.');
@@ -137,4 +164,33 @@ class TaskController extends Controller
         //redirect to index
         return redirect()->route('task.index')->with('success', 'Task deleted successfully');
     }
+
+    /**
+     * Mark as done
+     *
+     * @param mixed $request
+     * @param mixed $id
+     * @return RedirectResponse
+     */
+
+     public function markAsDone(Request $request, $id)
+     {
+        $task = Task::findOrFail($id);
+     
+     // Move to history table
+        HistoryTask::create([
+            'title' => $task->title,
+            'description' => $task->description,
+            'due_date' => $task->due_date,
+            'category' => $task->category,
+            'priority' => $task->priority,
+            'status' => 'done', // You can set this to any status you want for the history table
+        ]);
+     
+     // Delete from tasks table
+        $task->delete();
+     
+        return redirect()->route('task.index')->withSuccess('Task is done and moved to history.');
+     }     
+
 }

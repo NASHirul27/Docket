@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Data Mahasiswa</title>
+    <title>Docket</title>
 </head>
 
 <body class="dark:bg-gray-900">
@@ -111,7 +111,7 @@
             
 
             <div>
-                <button type="submit" class="bg-indigo-400 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" name="tambah">Tambah</button>
+                <button type="submit" class="bg-indigo-400 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" name="tambah">Create</button>
             </div>
         </form>
     </div>
