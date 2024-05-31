@@ -56,7 +56,7 @@
             <div class="mb-4">
                 <label for="due_date" class="block text-indigo-400 text-sm font-bold mb-2">Deadline:</label>
                 <input type="date" id="due_date" name="due_date" class="dark:bg-gray-800 text-white rounded-md py-2 px-3 w-full @error('due_date') is-invalid @enderror" 
-                value="{{ old('due_date', $task->tempat_lahir) }}">
+                value="{{ old('due_date', $task->due_date) }}">
             </div>
             {{-- alert --}}
             @error('due_date')

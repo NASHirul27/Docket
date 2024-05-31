@@ -36,7 +36,7 @@
                 </div>
                 <div class="mb-4">
                     <p class="text-indigo-400 font-semibold">Category:</a>
-                    <p class="text-lg text-white">{{ $task->Category }}</p>
+                    <p class="text-lg text-white">{{ $task->category }}</p>
                 </div>
                 <div class="mb-4">
                     <p class="text-indigo-400 font-semibold">Priority:</a>
